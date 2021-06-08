@@ -4,12 +4,12 @@
         Statement stmt = null;
         ArrayList<BookInfo> rst = new ArrayList<BookInfo>();
         try {
-            Class.forName(JDBC_DRIVER);
-            System.out.println("allInfo:正在连接数据库......");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Class.forName(JDBC_DRIVER); //加载数据库驱动
+            System.out.println("allInfo:正在连接数据库......");//连接数据库
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);//得到连接对象
             stmt = conn.createStatement();
             StringBuffer sql = new StringBuffer("select  book.xuhao,bookname,zongliang,yuliang,sj_number,leixing,image FROM book,book_image where book.xuhao=book_image.xuhao");
-            ResultSet rs = stmt.executeQuery(sql.toString());
+            ResultSet rs = stmt.executeQuery(sql.toString());//执行sql语句
             while (rs.next()) {
                 BookInfo dto = new BookInfo();
                 dto.setXuhao(rs.getInt("xuhao"));
@@ -21,8 +21,8 @@
                 dto.setImage(rs.getString("image"));
                 rst.add(dto);
             }
-            rs.close();
-            stmt.close();
+            rs.close();//关闭
+            stmt.close();//关闭
             conn.close();
             System.out.println("      allInfo:连接数据库成功......");
         } catch (SQLException se) {
