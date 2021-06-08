@@ -11,15 +11,15 @@
             StringBuffer sql = new StringBuffer("select  book.xuhao,bookname,zongliang,yuliang,sj_number,leixing,image FROM book,book_image where book.xuhao=book_image.xuhao");
             ResultSet rs = stmt.executeQuery(sql.toString());//执行sql语句
             while (rs.next()) {
-                BookInfo dto = new BookInfo();
-                dto.setXuhao(rs.getInt("xuhao"));
+                BookInfo dto = new BookInfo();//创建BookInfo对象
+                dto.setXuhao(rs.getInt("xuhao"));//赋值
                 dto.setBookname(rs.getString("bookname"));
                 dto.setZongliang(rs.getInt("zongliang"));
                 dto.setYuliang(rs.getInt("yuliang"));
                 dto.setSj_number(rs.getString("sj_number"));
                 dto.setLeixing(rs.getString("leixing"));
                 dto.setImage(rs.getString("image"));
-                rst.add(dto);
+                rst.add(dto);//添加
             }
             rs.close();//关闭
             stmt.close();//关闭
@@ -35,7 +35,7 @@
             } catch (SQLException se2) {
             }
             try {
-                if (conn != null) conn.close();
+                if (conn != null) conn.close();//关闭数据库连接
             } catch (SQLException se) {
                 se.printStackTrace();
             }
